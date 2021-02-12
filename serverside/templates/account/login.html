@@ -1,0 +1,146 @@
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load widget_tweaks %}
+
+{% block extra_head %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Stack admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>{% block title %} Iniciar Sesión - Clarity 2.0 {% endblock title %} </title>
+    <link rel="apple-touch-icon" href="{% static 'app-assets/images/ico/apple-icon-120.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app-assets/images/ico/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/icheck/icheck.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/icheck/custom.css' %}">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.css' %}">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/horizontal-menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/login-register.css' %}">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <!-- END: Custom CSS-->
+{% endblock extra_head %}
+
+{% block body_class %}
+<body class="horizontal-layout horizontal-menu horizontal-menu-padding 1-column  bg-full-screen-image blank-page blank-page" data-open="hover" data-menu="horizontal-menu" data-col="1-column">
+    {% endblock body_class %}
+
+{% block content %}
+<div class="app-content container center-layout mt-2">
+  <div class="content-overlay"></div>
+  <div class="content-wrapper">
+      <div class="content-header row">
+      </div>
+      <div class="content-body">
+          <section class="row flexbox-container">
+              <div class="col-12 d-flex align-items-center justify-content-center">
+                  <div class="col-lg-5 col-md-8 col-10 box-shadow-2 p-0">
+                      <div class="card border-grey border-lighten-3 m-0">
+                          <div class="card-header border-0">
+                              <div class="card-title text-center">
+                                  <div class="p-1"><img src="{% static 'app-assets/images/logo/stack-logo-dark.png' %}" alt="branding logo"></div>
+                              </div>
+                              <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>Inicia sesión con: </span></h6>
+                          </div>
+                          <div class="card-content">
+                              <div class="card-body pt-0 text-center">
+                                  <a href="{% provider_login_url 'google' %}" class="btn btn-social mb-1 mr-1 btn-outline-google"><span class="fa fa-google-plus font-medium-4"></span> <span class="px-1">Google</span> </a>
+                              </div>
+                              <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2"><span>o escribe tus credenciales.</span></p>
+                              <div class="card-body pt-0">
+                                <form class="login form-horizontal" method="POST" action="{% url 'account_login' %}">
+                                    {% csrf_token %}
+                                      <fieldset class="form-group floating-label-form-group">
+                                          <label for="user-name">Ingresa tu correo:</label>
+                                          {% render_field form.login type="email" name="login" maxlength="150" class="form-control" placeholder="Correo electrónico" aria-describedby="emailHelp" autocomplete="email" required="" id="id_login" %}
+                                          <small id="emailHelp" class="form-text text-muted">Ingresa tu correo: example@gnilat.com</small>
+
+                                        </fieldset>
+                                      <fieldset class="form-group floating-label-form-group mb-1">
+                                          <label for="user-password">Ingresa tu contraseña:</label>
+                                          {% render_field form.password type="password" name="password" maxlength="150" class="form-control"  placeholder="Contraseña" autocomplete="current-password" required="" id="id_password" %}
+                                      </fieldset>
+                                      <div class="form-group row">
+                                          <div class="col-sm-6 col-12 text-center text-sm-left">
+                                              <fieldset>
+                                                  <input type="checkbox" name="remember" id="id_remember" class="chk-remember">
+                                                  <label for="id_remember">{% trans "Remember Me" %}</label>
+                                              </fieldset>
+                                          </div>
+                                          <div class="col-sm-6 col-12 float-sm-left text-center text-sm-right">
+                                              <a href="{% url 'account_reset_password' %}" class="card-link">{% trans "Forgot Password?" %}</a>
+                                            </div>
+                                      </div>
+                                      <button type="submit" class="btn btn-outline-primary btn-block"><i class="feather icon-unlock"></i> {% trans "Sign In" %}</button>
+                                  </form>
+{% if form.errors %}
+{% for field in form %}
+    {% for error in field.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+        <strong>{{ error|escape }}</strong>
+    </div>
+{% endfor %}
+{% endif %}
+                              </div>
+                              <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>Eres nuevo</span></p>
+                              <div class="card-body"> 
+                                  <a href="{{ signup_url }}" class="btn btn-outline-danger btn-block"><i class="feather icon-user"></i> Register</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block extra_body %}
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'app-assets/vendors/js/ui/jquery.sticky.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/charts/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/forms/icheck/icheck.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+
+
+
+    <!-- BEGIN: Page JS-->
+    <script src="{% static 'app-assets/js/scripts/ui/breadcrumbs-with-stats.js' %}"></script>
+    <script src="{% static 'app-assets/js/scripts/forms/form-login-register.js' %}"></script>
+    <!-- END: Page JS-->
+{% endblock extra_body %}
+
+</body>

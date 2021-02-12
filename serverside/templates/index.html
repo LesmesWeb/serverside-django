@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Stack admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>{%block extra_titulo %}ServerSide - Inicio{%endblock extra_titulo %}</title>
+    <link rel="apple-touch-icon" href="{% static 'app-assets/images/ico/apple-icon-120.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app-assets/images/ico/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.css' %}">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu-modern.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/fonts/simple-line-icons/style.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/card-statistics.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/vertical-timeline.css' %}">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <!-- END: Custom CSS-->
+
+    <!-- BEGIN: Plugin SweetAlert2 CSS-->
+    <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <!-- END: SweetAlert2 CSS-->
+
+    {%block extra_css %}
+    <!-- BEGIN: extra_css CSS-->
+
+    
+
+    <!-- END: Custom CSS-->
+    {%endblock extra_css %}
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 2-columns fixed-navbar pace-done menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+    <!-- BEGIN: Header-->
+    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top navbar-semi-dark">
+        <div class="navbar-wrapper">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav flex-row">
+                    <li class="nav-item mobile-menu d-lg-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="feather icon-menu font-large-1"></i></a></li>
+                    <li class="nav-item mr-auto"><a class="navbar-brand" href="{% static 'html/ltr/vertical-collapsed-menu-template/index.html' %}"><img class="brand-logo" alt="stack admin logo" src="{% static 'app-assets/images/logo/stack-logo-light.png' %}">
+                            <h2 class="brand-text">Server 2</h2>
+                        </a></li>
+                    <li class="nav-item d-none d-lg-block nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon feather icon-toggle-right font-medium-3 white" data-ticon="feather.icon-toggle-right"></i></a></li>
+                    <li class="nav-item d-lg-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <!-- BEGIN: Proyectos-->
+                {% if perms.proyecto.view_proyecto %}
+                <li class=" navigation-header"><span>Proyectos</span><i class=" feather icon-minus" data-toggle="tooltip" data-placement="right" data-original-title="Apps"></i>
+                </li>
+                
+                <li class=" nav-item"><a href="{% url 'proyecto:lista_proyecto_filtros' %}"><i class="feather icon-mail"></i><span class="menu-title" data-i18n="Lista de Proyectos">Lista de Proyectos</span></a>
+                </li>
+                {% endif %}
+
+                {% if perms.proyecto.add_metodologia %}
+                <li class=" nav-item"><a href="{% url 'proyecto:lista_metodologia' %}"><i class="feather icon-message-square"></i><span class="menu-title" data-i18n="Metodologia">Metodologia</span></a>
+                </li>
+                {% endif %}
+
+            <!-- END: Proyectos-->
+
+           
+            </ul>
+
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <!-- BEGIN: Proyectos-->
+                    {% if perms.stakeholders.add_reglas %}
+                    <li class=" navigation-header"><span>Stakeholders</span><i class=" feather icon-minus" data-toggle="tooltip" data-placement="right" data-original-title="Apps"></i>
+                    </li>
+                    
+                    <li class=" nav-item"><a href="{% url 'stakeholders:ListarRegla' %}"><i class="feather icon-mail"></i><span class="menu-title" data-i18n="Lista de Proyectos">Reglas</span></a>
+                    </li>
+                    {% endif %}
+    
+                    {% if perms.stakeholders.add_actor %}
+                    <li class=" nav-item"><a href="{% url 'stakeholders:ListarActor' %}"><i class="feather icon-message-square"></i><span class="menu-title" data-i18n="Metodologia">Actores</span></a>
+                    </li>
+                    {% endif %}
+    
+                <!-- END: Proyectos-->
+    
+               
+                </ul>
+        </div>
+    </div>
+    <!-- END: Main Menu-->
+
+
+  <!-- BEGIN: Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <form method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+              {% endif %}
+              <button class= "btn btn-primary btn-user btn-block" type="submit"> Cerrar Sesión</button>
+            </form>
+
+        </div>
+    </div>
+    </div>
+  </div>
+<!-- END: Logout Modal-->
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        {%block extra_contenido %}
+        <!-- BEGIN: contenido -->
+    
+        <!-- END: contenido -->
+        {%endblock extra_contenido %}
+        
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light navbar-border">
+        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2020 <a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">PIXINVENT </a></span><span class="float-md-right d-none d-lg-block">Hand-crafted & Made with <i class="feather icon-heart pink"></i></span></p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+    <!-- BEGIN Vendor JS-->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+
+    
+    <!-- BEGIN: Theme JS-->
+    <!-- Funcionalidad del menu izquierdo de ocultar y mostrar -->
+    <script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+    <script src="{% static 'app-assets/js/core/app.js' %}"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Plugin SweetAlert2 CSS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- END: SweetAlert2 CSS-->
+    
+    <script src="{% static 'js/stakeholders/reglas/index.js' %}"></script>
+    
+    
+    {%block extra_js %}
+    <!-- BEGIN: extra_js JS-->
+
+    <!-- END: extra_js JS-->
+    {%endblock extra_js %}
+
+
+
+        {% if messages %}
+        {% for message in messages %}
+
+        <script>
+            swal.fire(
+                {% if 'God Job' in message.extra_tags %}
+                    "{{message.extra_tags}}", //God Job
+                    "{{message}}", //el Proyecto fue creado con éxito
+                    "success" // icon
+                    )
+                {% elif 'Error' in message.extra_tags %}
+                    "{{message.extra_tags}}",
+                    "{{message}}",
+                    "error"
+                    )
+                {% else %}
+                    {
+                        text: "{{message}}",
+                        icon: "{{message.tags}}",
+                    })
+                {% endif %}
+            
+        </script>
+
+        {% endfor %}
+        {% endif %}
+
+
+        
+
+        {%block extra_js_messages %}
+        <!-- BEGIN: extra_js_messages JS-->
+    
+        <!-- END: extra_js_messages JS-->
+        {%endblock extra_js_messages %}
+
+        {%block extra_js_ajax %}
+        <!-- BEGIN: extra_js_ajax JS-->
+    
+        <!-- END: extra_js_ajax JS-->
+        {%endblock extra_js_ajax %}
+    
+       
+
+</body>
+<!-- END: Body-->
+
+</html>

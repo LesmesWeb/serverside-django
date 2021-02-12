@@ -1,0 +1,278 @@
+/*style formulario de categorizacion*/
+
+/*Formulario*/
+.button-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#custom {
+  height: 100%;
+  overflow: auto;
+}
+
+#form_categorization {
+  width: 100%;
+  padding-top: 5%;
+}
+
+/*Selects*/
+.select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+  list-style: none;
+  font-size: 14px !important;
+}
+
+
+.tag_fragment li.select2-selection__choice {
+  background: #FE9A2E !important;
+  color: #fff !important;
+  padding: 5px 8px;
+  font-size: 14px !important;
+}
+
+.tema_fragment li.select2-selection__choice {
+  background: #2E9AFE !important;
+  color: #fff !important;
+  padding: 5px 8px;
+  font-size: 17px !important;
+}
+
+.pasive_fragment li.select2-selection__choice {
+  background: #8c8c8c !important;
+  color: #fff !important;
+  padding: 5px 8px;
+  font-size: 17px !important;
+}
+
+.autor_fragment li.select2-selection__choice {
+  background: #8c8c8c !important;
+  color: #fff !important;
+  padding: 5px 8px;
+  font-size: 17px !important;
+}
+
+.active_fragment li.select2-selection__choice {
+  background: #8c8c8c !important;
+  color: #fff !important;
+  padding: 5px 8px;
+  font-size: 17px !important;
+}
+
+
+.group-form-clarity {
+  display: grid !important;
+  grid-template-columns: 1fr;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  float: right;
+  color: white !important;
+  margin-left: 6px !important;
+}
+
+.select2-offscreen,
+.select2-offscreen:focus {
+  clip: rect(0 0 0 0) !important;
+  width: 1px !important;
+  height: 1px !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  outline: 0 !important;
+}
+
+.slider {
+  width: 90%;
+  -webkit-appearance: none;
+  width: 90%;
+  height: 6px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #2E9AFE;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #2E9AFE;
+  cursor: pointer;
+}
+
+#save_form {
+  background-color: #00C0B0;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-left: 123px;
+}
+
+
+#delete_form {
+  background-color: red;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-left: 0px;
+}
+
+
+
+/* comienza estilos de los titulos */
+.label-fragment {
+  font-size: 14px;
+  color: #000 !important;
+  font-weight: 500;
+  font-family: sans-serif;
+  margin-bottom: 1px;
+  width: 100%;
+}
+
+
+/* estilos por grupos: 
+contiene: label e input */
+.group-fragment {
+  margin-top: 10px;
+}
+
+/*Titulos de la tonalidad*/
+.tone-tittles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+
+}
+
+.negative {
+  text-align: right;
+  color: #00403A;
+  font-weight: normal;
+  font-family: sans-serif;
+  font-size: 13px;
+
+}
+
+.positive {
+  text-align: left;
+  color: #00403A;
+  font-weight: normal;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.neutral {
+  text-align: center;
+  color: #00403A;
+  font-weight: 600;
+  font-weight: normal;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.fragment-entities{
+  background: rgb(151, 179, 233);
+  border-radius: 4px 5px 5px;
+}
+
+
+.fragment-entities small{
+  color: white;
+  margin-left: 4%;
+} 
+
+.select2-container--default .select2-selection--multiple:before  {
+  display: none ; 
+}
+
+
+.select2-container--default .select2-selection--multiple:before {
+  content: '';
+  font-family: "icomoon";
+  display: block;
+  position: absolute;
+  border-color: #888 transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px 4px 0 4px;
+  height: 0;
+  right: 6px;
+  margin-left: -4px;
+  margin-top: -2px;top: 50%;
+  width: 0;cursor: pointer
+}
+
+.container-fluid::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.container-fluid::-webkit-scrollbar:vertical {
+  width:10px;
+}
+
+.container-fluid::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+  display: none;
+} 
+
+.container-fluid::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.container-fluid::-webkit-scrollbar-thumb {
+  background-color: rgba(90,92,105,.5);
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.contenedor::-webkit-scrollbar-track {
+  border-radius: 10px;  
+}

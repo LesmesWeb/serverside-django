@@ -1,0 +1,17 @@
+# Python
+*.pyc
+*.pyo
+__pycache__
+
+# Django #
+*.log
+*.pot
+*.pyc
+media
+
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+# Visual Studio Code #
+.vscode/*

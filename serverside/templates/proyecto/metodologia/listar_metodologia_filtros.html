@@ -1,0 +1,412 @@
+{% extends 'index.html' %}
+{% load staticfiles %} 
+{% load widget_tweaks %} 
+
+
+{%block extra_titulo %}Metodología{%endblock extra_titulo %}
+
+{%block extra_css %}
+<!-- BEGIN: extra_css CSS-->
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/extensions/rowReorder.dataTables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/extensions/responsive.dataTables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/icheck/icheck.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/icheck/custom.css' %}">
+    <!-- END: Vendor CSS-->
+
+
+   <!-- BEGIN: Page CSS-->
+   <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/app-contacts.css' %}">
+   <!-- END: Page CSS-->
+   
+   <!-- BEGIN: Select2 CSS-->
+   <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/selects/select2.min.css' %}">
+   <!-- END: Select2 CSS-->
+
+
+<!-- END: Custom CSS-->
+{%endblock extra_css %}
+
+{%block extra_contenido %}
+<!-- BEGIN: contenido -->
+<div class="content-wrapper">
+   <div class="content-header row">
+       <div class="content-header-left col-md-6 col-12 mb-2">
+           <h3 class="content-header-title mb-0">Listado de Metodología</h3>
+           <div class="row breadcrumbs-top">
+               <div class="breadcrumb-wrapper col-12">
+                   <ol class="breadcrumb">
+                       <li class="breadcrumb-item"><a href="index.html">Home</a>
+                       </li>
+                       <li class="breadcrumb-item"><a href="#">Components</a>
+                       </li>
+                       <li class="breadcrumb-item active">Card Actions
+                       </li>
+                   </ol>
+               </div>
+           </div>
+       </div>
+       <div class="content-header-right text-md-right col-md-6 col-12">
+           <div class="form-group">
+               <button class="btn-icon btn btn-secondary btn-round" type="button"><i class="feather icon-bell"></i></button>
+               <button class="btn-icon btn btn-secondary btn-round" type="button"><i class="feather icon-life-buoy"></i></button>
+               <button class="btn-icon btn btn-secondary btn-round" type="button"><i class="feather icon-settings"></i></button>
+           </div>
+       </div>
+   </div>
+   <div class="content-body">
+       <!-- card actions section start -->
+       <section id="card-actions">
+           <div class="row">
+               <div class="col-12">
+                   <div class="card">
+                       <div class="card-header pb-0">
+                           <h4 class="card-title">Filtros</h4>
+                           <hr>
+                           <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                           <div class="heading-elements">
+                               <ul class="list-inline mb-0">
+                                   <li><a data-action="collapse"><i class="feather icon-minus"></i></a></li>
+                                 <!--
+                                   <li><a data-action="reload"><i class="feather icon-rotate-cw"></i></a></li>
+                                   <li><a data-action="expand"><i class="feather icon-maximize"></i></a></li> 
+                                 -->
+                                   <li><a data-action="close"><i class="feather icon-x"></i></a></li>
+                               </ul>
+                           </div>
+                       </div>
+                       
+                       <div class="card-content collapse show" style="">
+                           <div class="card-body pt-0">
+                               <div class="row">
+                                   <div class="col-xl-12 col-lg-12">
+                                    <form action="{% url 'proyecto:lista_metodologia' %}" method="GET" enctype="multipart/form-data" class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-12 col-xl-3 col-lg-6 col-sm-6">
+                                            
+                                                <label>Fecha Inicio:</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                                    </div>
+                                                    {% render_field myfilter.form.start_date type="date" class="form-control" %}
+                                                </div>
+                                        </div>
+
+                                        <div class="col-12 col-xl-3 col-lg-6 col-sm-6">
+                                        <label>Fecha Fin:</label>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-align-right"></i></span>
+                                            </div>
+                                            {% render_field myfilter.form.end_date type="date" class="form-control birthdate-picker" data-validation-required-message="This birthdate field is required" %}
+                                            </div>
+                                        </div>
+                                        
+
+                                            
+                                            
+
+                                            <div class="col-12 col-xl-3 col-lg-6 col-sm-6">
+                                                <label>Nombre:</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-align-right"></i></span>
+                                                    </div>
+                                                    {% render_field myfilter.form.nombre placeholder="Ingresa el texto" type="search" class="form-control" style="width: 100%;" %}
+                                                </div>
+                                             </div>
+                                        
+    
+                                        <!--
+                                            Usar estilos para select2 del siguiente template 
+                                            file:///C:/webapp/clarity_design/Plantilla%20stack-admin-v4.0/stack-admin/html/ltr/vertical-menu-template-nav-dark/table-components.html
+                                        -->
+                                        
+                                    </div>
+
+                                        <div class="row">
+                                                <div class="col-4 col-xl-1 col-lg-2 col-sm-2">
+                                                <button class="btn btn-primary btn-ls btn-block" type="submit">
+                                                <i class="fa fa-search"> </i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                 </div>
+                               </div>
+                           </div>
+                    </div>
+                </div>
+           </div>
+        </section>
+                  
+                <!-- 
+                    LANGUAGE - COMMA DECIMAL PLACE
+
+                    Fijarse en los estilos de esté link:
+                    file:///C:/webapp/clarity_design/Plantilla%20stack-admin-v4.0/stack-admin/html/ltr/vertical-menu-template-nav-dark/dt-basic-initialization.html
+                
+                -->
+
+                    <section class="row all-contacts">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-head">
+                                    <div class="card-header">
+                                        <!-- <h4 class="card-title">Listado de Proyectos</h4> -->
+                                                                               
+                                            {% if perms.proyecto.add_metologia%}       
+                                            <button onclick="abrir_modal_crear_metodologia('{% url 'proyecto:crear_metodologia' %}')" class="btn btn-primary btn-md">Crear Metodología <i class="d-md-none d-block feather icon-plus white"></i></button>
+                                            {% else %}
+                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Sin permisos para añadir">
+                                                <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>No tienes permiso para añadir Metodología</button>
+                                              </span>
+                                            {% endif %} 
+
+                                            <!-- BEGIN: Editar Proyecto -->
+                                            <div class="modal fade" id="modal_edicion_metodologia" role="dialog">
+
+                                            </div>
+
+                                            <!-- Modales que inician fin ocultos --> 
+ 
+                                            <!-- BEGIN: Editar Proyecto -->
+                                            <div class="modal fade" id="modal_crear_metodologia" role="dialog">
+
+                                            </div> 
+                                            <span class="dropdown">
+                                                <button id="btnSearchDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-warning dropdown-menu-right dropdown-toggle btn-md">
+                                                    <i class="feather icon-download-cloud white"></i></button>
+                                                <span aria-labelledby="btnSearchDrop1" class="dropdown-menu dropdown-menu-right mt-1">
+                                                    <a href="#" class="dropdown-item"><i class="feather icon-upload"></i> Import</a>
+                                                    <a href="#" class="dropdown-item"><i class="feather icon-download"></i> Export</a>
+                                                    <a href="#" class="dropdown-item"><i class="feather icon-shuffle"></i> Find Duplicate</a>
+                                                </span>
+                                            </span>
+                                            <button class="btn btn-default btn-sm"><i class="feather icon-settings white"></i></button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <!-- Task List table -->
+                                        <div class="table-responsive text-center">
+                                            <table id="users-contacts" class="table table-striped table-bordered dom-positioning dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th><input type="checkbox" class="input-chk" id="check-all" onclick="toggle();"></th>
+                                                        <th> {{form.nombre.label}} </th>
+                                                        <th> Fecha de creación </th>
+                                                        <th> Opciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for list_detalle in object_list %}
+                                                    <tr>
+                                                        <td><input type="checkbox" class="input-chk check"></td>
+                                                        
+
+
+                                                        <td class="text-center">{{ list_detalle.nombre }}</td>
+                                                        <td class="text-center">{{ list_detalle.created_at }}</td>
+                                                                                                              
+                                                        <td>
+                                                                 <!-- Editar -->
+                                                                 <div class="row">
+                                                            <div class="col-6 col-xl-6 col-lg-6 col-sm-6 p-0 text-right">
+                                                            {% if perms.proyecto.change_metodologia %}
+                                                           
+                                                            <button onclick="abrir_modal_edicion_metodologia('{% url 'proyecto:editar_metodologia' list_detalle.id %}')" class="btn btn-info"><i class="fa fa-edit fa-1x"> </i></button>
+
+            
+                                                            {% else %}
+                                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Sin permisos para editar">
+                                                                <button class="btn btn-info "><i class="fa fa-edit" disabled> </i></button>
+                                                            </span>                                                            </span>
+                                                            {% endif %} 
+                                                        </div>
+                                                            <!-- Eliminar -->
+                                                        <div class="col-6 col-xl-6 col-lg-6 col-sm-6 pl-1 text-left">
+                                                            {% if perms.proyecto.delete_metodologia %}
+                                                            <button onclick="eliminarMetodologia({{ list_detalle.id }})" class="btn btn-danger"><i class="feather icon-edit-2 fa-1x"> </i></button>
+                                                            {% else %}
+                                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Sin permisos para eliminar">
+                                                                <button class="btn btn-danger"><i class="feather icon-edit-2 fa-1x" disabled> </i></button>
+                                                    
+                                                            {% endif %} 
+                            
+                                                        </div></div>
+                                                            <!--
+                                                            <span class="dropdown">
+                                                                <a id="btnSearchDrop2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="dropdown-toggle dropdown-menu-right"><i class="fa fa-ellipsis-v"></i></a>
+                                                                <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                    <a data-toggle="modal" data-target="#EditarProyecto" class="dropdown-item edit"><i class="feather icon-edit-2"></i>
+                                                                        Edit</a>
+                                                                    <a href="#" class="dropdown-item delete"><i class="feather icon-trash-2"></i> Delete</a>
+                                                                    <a href="#" class="dropdown-item"><i class="feather icon-plus-circle primary"></i> Projects</a>
+                                                                    <a href="#" class="dropdown-item"><i class="feather icon-plus-circle info"></i> Team</a>
+                                                                    <a href="#" class="dropdown-item"><i class="feather icon-plus-circle warning"></i> Clients</a>
+                                                                    <a href="#" class="dropdown-item"><i class="feather icon-plus-circle success"></i> Friends</a>
+                                                                </span>
+                                                            </span>
+                                                            -->
+
+                                                        </td>
+
+                                                        {% endfor %}                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th><input type="checkbox" class="input-chk" id="check-all" onclick="toggle();"></th>
+                                                        <th> {{form.nombre.label}} </th>
+                                                        <th> Fecha de creación </th>
+                                                        <th> Opciones</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+    </div>
+            
+</div>
+<!-- END: contenido -->
+
+{%endblock extra_contenido %}
+
+
+
+{%block extra_js %}
+<!-- BEGIN: extra_js JS-->
+
+    <!-- BEGIN: Page select2 JS-->
+   <script src="{% static 'app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+   
+    <!-- END: Page select2 JS--> 
+    
+    <!-- BEGIN: modal_edicion_metodologia JS-->
+    <script type="text/javascript">
+        
+
+        var $ = jQuery.noConflict();
+    
+        function abrir_modal_crear_metodologia(url) 
+        {
+            $('#modal_crear_metodologia').load(url, function()
+            {
+                $(this).modal('show');
+                //Begin: Función para validar nombre repetido y borrarlo
+                $('#nombre_metodologia_input').change(function(){
+                        var data = { 
+                            username: $('#nombre_metodologia_input').val() 
+                        }
+                    
+                        $.ajax({
+                            url : '{% url 'proyecto:validar_input_metodologia' %}', 
+                            method : "POST", 
+                            data : { nombre_data_ajax:  data[Object.keys(data)[0]],
+                                    csrfmiddlewaretoken: '{{ csrf_token }}' },
+                                success: function(response) {
+                                        // response, es el diccionario que envias desde python
+                                        if (response['valido']==false){
+                                            console.log("IF")
+                                            return true; // esto quiere decir que el formulario se enviara correctamente para guardar los datos en la base de datos
+                                        } else{ // si no enviamos desde el servidor que la respuesta está valida, entra aca
+                                        console.log("ELSE")
+                                            alert('Un proyecto ya se encuentra creado con ese nombre');
+                                            //event.preventDefault(); // este event, se supone es el que viene cuando haces $('form').submit(function(**event**){/... aqui se supone va el codigo que estoy escribiendo .../})
+                                            //location.href='{% url 'proyecto:lista_proyecto_filtros' %}';
+                                            $("#nombre_proyecto_input").val('')
+                                            return false;
+                                        }
+                                }
+                        }); 
+                    
+                    }); 
+                //End: Función para validar nombre repetido y borrarlo
+            
+            });
+        }
+
+        function abrir_modal_edicion_metodologia(url) 
+        {
+            $('#modal_edicion_metodologia').load(url, function()
+            {
+                $(this).modal('show');
+            });
+        }
+        
+
+    
+    </script>
+    
+    <!-- END: modal_edicion_metodologia JS--> 
+
+    <script>
+        $(document).ready(function() {
+            {% if form.errors %}
+            $("#modal_crear_metodologia").modal("show");
+            {% endif %}
+        });
+
+    </script>
+   
+    
+   <!-- BEGIN: Page Vendor JS-->
+   <script src="{% static 'app-assets/vendors/js/tables/jquery.dataTables.min.js' %}"></script>
+   <script src="{% static 'app-assets/vendors/js/extensions/jquery.raty.js' %}"></script>
+   <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js' %}"></script>
+   <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js' %}"></script>
+   <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js' %}"></script>
+   <script src="{% static 'app-assets/vendors/js/forms/icheck/icheck.min.js' %}"></script>
+   <!-- END: Page Vendor JS-->
+   
+    <!-- BEGIN: Page JS funcionalidad para listar en la tabla-->
+    <script src="{% static 'app-assets/js/scripts/pages/app-contacts.js' %}"></script>
+    <!-- END: Page JS-->
+
+
+
+<!-- END: extra_js JS-->
+{%endblock extra_js %}
+
+{%block extra_js_messages %}
+
+<!-- preguntar si en verdad desea eliminar-->
+
+<script> 
+    function eliminarMetodologia(id){
+        console.log(id)
+        Swal.fire({
+            "title":"¿Estas seguro?",
+            "text": "Esto Eliminara la metodología permanentemente",
+            "icon":"question",
+            "showCancelButton":true,
+            "cancelButtonText":"No, Cancelar",
+            "cancelButtonClass":"btn-primary",
+            "confirmButtonText":"Si, Eliminar",
+            "reverseButtons":true,
+            "confirmButtonColor":"#dc3545"
+        })
+        //cuando se ejecute va generar un resultado
+        .then(function(result){
+            if(result.isConfirmed){
+                //https://stackoverflow.com/questions/37311042/call-django-urls-inside-javascript-on-click-event
+                var url = "{% url 'proyecto:eliminar_metodologia' id=123 %}";
+                console.log(url)
+                document.location.href= url.replace('123', id);
+            }
+        })
+    }
+</script>
+
+  {%endblock extra_js_messages %}

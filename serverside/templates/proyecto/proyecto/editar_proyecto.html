@@ -1,0 +1,105 @@
+{% load widget_tweaks %} 
+
+<div class="modal-dialog modal-lg" role="document">
+   <div class="modal-content">
+      <div class="modal-header">
+         <h2 class="modal-title">Edición de Stakeholder: {{ object }}</h2>
+         <button class="close" type="button" data-dismiss = "modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <form action="{% url 'proyecto:editar_proyecto' pk=id_proyecto %}" method="post">
+         {% csrf_token %}
+         <div class="modal-body">
+            
+
+            <div class="row">
+               <div class="col">
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.nombre.label }}:</label>
+                     <!--  
+                        pattern="^[^ ].+[^ ]$" 
+                        da aviso cuando los datos están con espaciado al inicio 
+                        y final tener presente que si hay un ajax deja de funcionar el ajax 
+                     -->
+                     {% render_field form.nombre id="nombre_proyecto_input" class="form-control" %}
+                  </div>
+      
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.meta.label }}:</label>
+                     {{ form.meta}}
+                  </div>
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.link_powerbi.label }}:</label>
+                     {{ form.link_powerbi }}
+                  </div>
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.tipo_prediccion.label }}:</label>
+                     {% render_field form.tipo_prediccion %}
+                  </div>
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.estado.label }}:</label>
+                     {% render_field form.estado %}
+                  </div>
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.tags.label }}:</label>
+                     {% render_field form.tags id="select_multiple_crear_proyecto_tags" class="form-control" %}
+
+                  </div>
+               </div>
+               <div class="col">
+
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.metodologia.label }}:</label>
+                     {% render_field form.metodologia id="select_multiple_crear_proyecto_metodologia" class="form-control" %}
+                     <!--
+                     {#% if perms.proyecto.add_metologia%#}
+                        <button onclick="abrir_modal_crear_metodologia('{% url 'proyecto:crear_metodologia' %}')" class="btn btn-primary btn-md">Metodología <i class="d-md-none d-block feather icon-plus white"></i></button>
+
+                        {#% endif %#} 
+                        -->   
+                  </div>
+                   <div class="form-group">
+                     <label class="col-form-label">{{ form.director.label }}:</label>
+                     {% render_field form.director id="select_multiple_crear_proyecto_director" class="form-control" %}
+
+                  </div>
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.colaborador.label }}:</label>
+                     {% render_field form.colaborador id="select_multiple_crear_proyecto_colaborador" class="form-control" %}
+
+                  </div>
+                  <div class="form-group">
+                     <label class="col-form-label">{{ form.descripcion.label }}:</label>
+                     {{ form.descripcion }}
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+               <button class="btn btn-primary" type="submit">Confirmar</button>
+               <!-- BEGIN: Validación de errores -->
+                  {% if form.errors %}
+                  {% for field in form %}
+                     {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">
+                              <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                              <strong>{{ error|escape }}</strong>
+                        </div>
+                     {% endfor %}
+                  {% endfor %}
+                  {% for error in form.non_field_errors %}
+                     <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                        <strong>{{ error|escape }}</strong>
+                     </div>
+                  {% endfor %}
+                  {% endif %}
+               <!-- END: Validación de errores -->
+            </div>
+         </div>
+      </form> 
+   </div>
+</div>

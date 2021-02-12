@@ -1,0 +1,198 @@
+{% extends 'index.html' %}
+{% load staticfiles %} 
+{% load widget_tweaks %} 
+
+
+{%block extra_titulo %}Reglas{%endblock extra_titulo %}
+
+{%block extra_css %}
+<!-- BEGIN: extra_css CSS-->
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/extensions/rowReorder.dataTables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/extensions/responsive.dataTables.min.css' %}">
+    <!-- END: Vendor CSS-->
+  
+   <!-- BEGIN: Select2 CSS-->
+   <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/selects/select2.min.css' %}">
+   <!-- END: Select2 CSS-->
+
+
+<!-- END: Custom CSS-->
+{%endblock extra_css %}
+
+{%block extra_contenido %}
+<!-- BEGIN: contenido -->
+<div class="content-wrapper">
+   <div class="content-header row">
+       <div class="content-header-left col-md-6 col-12 mb-2">
+           <h3 class="content-header-title mb-0">Listado de Reglas</h3>
+           <div class="row breadcrumbs-top">
+               <div class="breadcrumb-wrapper col-12">
+                   <ol class="breadcrumb">
+                       <li class="breadcrumb-item"><a href="index.html">Home</a>
+                       </li>
+                       <li class="breadcrumb-item"><a href="#">Components</a>
+                       </li>
+                       <li class="breadcrumb-item active">Card Actions
+                       </li>
+                   </ol>
+               </div>
+           </div>
+       </div>
+       <div class="content-header-right text-md-right col-md-6 col-12">
+           <div class="form-group">
+               <button class="btn-icon btn btn-secondary btn-round" type="button"><i class="feather icon-bell"></i></button>
+               <button class="btn-icon btn btn-secondary btn-round" type="button"><i class="feather icon-life-buoy"></i></button>
+               <button class="btn-icon btn btn-secondary btn-round" type="button"><i class="feather icon-settings"></i></button>
+           </div>
+       </div>
+   </div>
+   <div class="content-body">
+       <!-- card actions section start -->
+
+                  
+                <!-- 
+                    LANGUAGE - COMMA DECIMAL PLACE
+
+                    Fijarse en los estilos de esté link:
+                    file:///C:/webapp/clarity_design/Plantilla%20stack-admin-v4.0/stack-admin/html/ltr/vertical-menu-template-nav-dark/dt-basic-initialization.html
+                
+                -->
+
+                    <section class="row all-contacts">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-head">
+                                    <div class="card-header">
+                                        <!-- <h4 class="card-title">Listado de Proyectos</h4> -->
+                                                                               
+                                            {% if perms.stakeholders.add_reglas %}       
+                                            <button onclick="abrir_modal_creacion_regla('{% url 'stakeholders:CrearRegla' %}')" class="btn btn-primary btn-md">Crear Reglas</button>
+                                            {% else %}
+                                            <span class="d-inline-block" data-toggle="tooltip" title="Sin permisos para añadir">
+                                                <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>No tienes permiso para añadir Reglas</button>
+                                              </span>
+                                            {% endif %} 
+                                            
+                                            <span class="dropdown">
+                                                <button id="btnSearchDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-warning dropdown-menu-right dropdown-toggle btn-md">
+                                                    <i class="feather icon-download-cloud white"></i></button>
+                                                <span aria-labelledby="btnSearchDrop1" class="dropdown-menu dropdown-menu-right mt-1">
+                                                    <a href="#" class="dropdown-item"><i class="feather icon-upload"></i> Import</a>
+                                                    <a href="#" class="dropdown-item"><i class="feather icon-download"></i> Export</a>
+                                                    <a href="#" class="dropdown-item"><i class="feather icon-shuffle"></i> Find Duplicate</a>
+                                                </span>
+                                            </span>
+                                            <button class="btn btn-default btn-sm"><i class="feather icon-settings white"></i></button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <!-- Task List table -->
+                                        <div class="table-responsive text-center">
+                                            <table id="tabla_listar_reglas" class="table table-striped table-bordered dom-positioning dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <!-- 
+                                                        <th><input type="checkbox" class="input-chk"></th>
+                                                        -->
+                                                       
+                                                        <th>id</th> 
+                                                        <th>num</th> 
+                                                        <th>actor__nombre</th>
+                                                        <th>Nombre {% comment %} {{form.nombre.label}} {% endcomment %}</th>
+                                                        <th>action</th>
+                                                        <!-- 
+                                                        <th>Creación </th> 
+                                                        <th>Actualización </th>
+                                                        <th>Opciones</th>
+                                                        -->
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Carga con el ajax-->
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <!-- 
+                                                        <th><input type="checkbox" class="input-chk"></th>
+                                                        -->
+                                                        
+                                                        <th>id</th> 
+                                                        <th>num</th> 
+                                                        <th>actor__nombre</th>
+                                                        <th>Nombre {% comment %} {{form.nombre.label}} {% endcomment %}</th>
+                                                        <th>action</th>
+                                                        <!-- 
+                                                        <th>Creación </th> 
+                                                        <th>Actualización </th>
+                                                        <th>Opciones</th>
+                                                        -->
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+    </div>
+            
+</div>
+<!-- END: contenido -->
+
+                                            <!-- BEGIN: Modales -->
+
+                                            <!-- Crear Regla -->
+                                            <div class="modal fade" id="creacion" role="dialog">
+
+                                            </div> 
+
+                                            <!-- Editar Regla -->
+                                            <div class="modal fade" id="edicion" role="dialog">
+
+                                            </div>
+
+                                            <!-- eliminacion Regla -->
+                                            <div class="modal fade" id="eliminacion" role="dialog">
+
+                                            </div>
+                                            <!-- END: Modales  --> 
+ 
+
+
+
+{%endblock extra_contenido %}
+
+
+
+{%block extra_js %}
+<!-- BEGIN: extra_js JS-->
+
+
+    
+  
+    
+   <!-- BEGIN: Page Vendor JS-->
+   <script src="{% static 'app-assets/vendors/js/tables/jquery.dataTables.min.js' %}"></script>
+   <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js' %}"></script>
+   <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js' %}"></script>
+   <!-- END: Page Vendor JS-->
+   
+
+   <!-- BEGIN: Page select2 JS-->
+   <script src="{% static 'app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+   
+   <!-- END: Page select2 JS--> 
+
+<!-- END: extra_js JS-->
+{%endblock extra_js %}
+
+
+

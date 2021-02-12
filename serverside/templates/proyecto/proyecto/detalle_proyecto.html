@@ -1,0 +1,116 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{%block titulo%} Ingestion Texto Medios {%endblock titulo%}
+
+{% block extra_css %}
+
+  <link href="{% static 'vendor/select2/dist/css/select2.css' %}" rel="stylesheet">
+  <script src="{% static 'vendor/select2/dist/js/select2.js' %}" crossorigin="anonymous" ></script>
+<style>
+	.btn-circle-lg {
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  font-size: 1.1rem;
+}
+</style>
+
+{% endblock extra_css %}
+
+{% block contenido %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+      
+            <h7 class="text-muted">Fecha de Creación: {{ object.created_at}}</h7>
+<div class="row">
+
+	<div class="col-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100">
+        	 <h4 class="font-weight-bold text-primary"> {{object}}</h4>
+
+
+<hr><p>{{object.descripcion|default:"El usuario no tiene ninguna descripción" }}</p>
+
+
+<hr>
+          <h4 class="mb-4">Colaboradores</h4>
+          {% for i in object.user.all %}
+          <button title="{{i}}" class="btn btn-primary btn-circle btn-circle-lg m-1"><i class="far fa-user"></i></button> 
+          <!-- lg circle buttons-->
+		  {% endfor %}
+
+        </div>
+
+
+      </div>
+<div class="col-6">
+
+        <div class="bg-white p-4 rounded shadow-sm h-100">
+            <div class="card-header py-3">
+                <h4 class="font-weight-bold text-primary"> Detalles de Proyectos</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table table-striped" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th> Meta </th>
+                                <th> Estado </th>
+                                <th> Metodologia </th>
+                                <th> Cliente </th>
+                                <th> Link PowerBI </th>
+                         
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ object.meta}}</td>
+                                <td>{{ object.estado|yesno:"Activo,Inactivo,maybe" }}</td>
+
+                                <td>{{ object.metodologia.all|join:", "}}</td>
+                                <td>{{ object.cliente}}</td>
+                                <td><a href="{{ object.link_powerbi}}" target="blank" class="btn btn-primary btn-circle btn-circle-sm m-1"><i class="fas fa-link"></i></a>
+                                </td>
+                              
+                          
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                <div class="card-footer">
+      <h6 class="text-muted">Fecha de Modificación: {{ object.updated_at}}</h6>
+    </div>
+
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- /.container-fluid -->
+
+
+
+{% endblock contenido %}
+
+
+{% block javascript %}
+  
+  <script>
+  
+      $('.activate_select').select2({
+      placeholder: "Buscar y Selecionar",
+      dropdownAutoWidth: false,
+      allowClear: true,
+   });
+
+
+</script>
+
+{% endblock javascript %}

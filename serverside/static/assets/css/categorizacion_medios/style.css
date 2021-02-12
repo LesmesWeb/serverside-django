@@ -1,0 +1,30 @@
+
+.input-group-text{
+    background: #00AEB1;
+    color: white;
+}
+
+/* Seleccion del articulo */
+.selectedText {
+    position: relative;
+    background-color: #00C0B0;
+    color: #fff;
+    line-height: 1.2em;
+    user-select: none;
+  }
+
+  /*Estilos de formulario de categorizacion*/
+  #povDivform {
+    position: absolute;
+    margin-top: 30px;
+    z-index: 1000;
+    border-radius: 8px;
+    box-shadow: 2px 3px 4px rgb(122, 121, 121);
+    -webkit-animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    overflow: hidden;
+    border: 1px solid #cecece;
+    height: 519px;
+    width: 341px;
+    background: white;
+  }
