@@ -197,7 +197,7 @@ class CrearProyecto(_FormValid,CreateView):
 	error_message = 'No se guardo con exito.'
 
 	def get_queryset(self):
-		queryset = self.model.objects.all().prefetch_related('director').prefetch_related('colaborador').prefetch_related('metodologia').prefetch_related('keywords').select_related('cliente')
+		queryset = self.model.objects.all().prefetch_related('director').prefetch_related('colaborador').prefetch_related('metodologia')
 		return queryset 
 
 	def post(self, request, *args, **kwargs):
@@ -242,7 +242,7 @@ class EditarProyecto(_FormValid,UpdateView):
 
 	# Solución al n+1
 	def get_queryset(self):
-		queryset = self.model.objects.all().prefetch_related('director').prefetch_related('colaborador').prefetch_related('metodologia').prefetch_related('keywords').select_related('cliente')
+		queryset = self.model.objects.all().prefetch_related('director').prefetch_related('colaborador').prefetch_related('metodologia')
 		return queryset 
 
 	# Devuelve la instacia del formulario lista

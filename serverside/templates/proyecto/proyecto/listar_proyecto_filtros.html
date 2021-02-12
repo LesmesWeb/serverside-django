@@ -221,7 +221,6 @@
                                                         <th> {{form.estado.label}} </th>
                                                         <th> Director</th>
                                                         <th> {{form.metodologia.label}} </th>
-                                                        <th> {{form.cliente.label}} </th>
                                                         <th> Opciones</th>
                                                     </tr>
                                                 </thead>
@@ -237,7 +236,6 @@
                                                         <td class="text-center">{{ list_detalle.estado|yesno:"Activo,Inactivo,maybe" }}</td>
                                                         <td class="text-center">{{ list_detalle.director.all|join:", "}}</td>
                                                         <td class="text-center">{{ list_detalle.metodologia.all|join:", " }}</td>
-                                                        <td class="text-center">{{ list_detalle.cliente }}</td>                                                        
                                                         <td>
                                                                  <!-- Editar -->
                                                                  <div class="row">
@@ -291,7 +289,6 @@
                                                         <th> {{form.estado.label}} </th>
                                                         <th> Director </th>
                                                         <th> {{form.metodologia.label}} </th>
-                                                        <th> {{form.cliente.label}} </th>
                                                         <th> Opciones</th>
                                                     </tr>
                                                 </tfoot>
@@ -374,14 +371,6 @@
                     $(this).val($(this).val().replace(/\s+/g, ''));
                 });
                 */
-
-                $('#select_one_crear_proyecto_cliente').select2({
-                    placeholder: "Buscar y Selecionar",
-                    dropdownAutoWidth: false,
-                    allowClear: true,
-                    selectOnClose: false,
-                    width: '100%',
-                });  
 
                 $('#select_multiple_crear_proyecto_keywords').select2({
                     multiple: true,
@@ -496,29 +485,7 @@
             {
                 $(this).modal('show');
             
-                $('#select_one_editar_proyecto_cliente').select2({
-                    placeholder: "Buscar y Selecionar",
-                    dropdownAutoWidth: false,
-                    allowClear: true,
-                    selectOnClose: false,
-                    width: '100%',
-                });  
 
-                $('#select_multiple_editar_proyecto_keywords').select2({
-                    multiple: true,
-                    placeholder: "Buscar y Selecionar",
-                    dropdownAutoWidth: false,
-                    allowClear: true,
-                    minimumInputLength: 1, //https://github.com/select2/select2/issues/2561
-                    //maximumSelectionLength: 3,
-                    width: '100%',
-                    language: {
-                        inputTooShort: function() {
-                            return 'Por favor agregue más texto';
-                        }
-                    }
-                });
-                
                 $('#select_multiple_editar_proyecto_tags').select2({
                     multiple: true,
                     placeholder: "Buscar y Selecionar",

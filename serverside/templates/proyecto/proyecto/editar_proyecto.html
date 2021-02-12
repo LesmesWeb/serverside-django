@@ -43,7 +43,7 @@
                   </div>
                   <div class="form-group">
                      <label class="col-form-label">{{ form.tags.label }}:</label>
-                     {% render_field form.tags id="select_multiple_crear_proyecto_tags" class="form-control" %}
+                     {% render_field form.tags id="select_multiple_editar_proyecto_tags" class="form-control" %}
 
                   </div>
                </div>
@@ -51,22 +51,17 @@
 
                   <div class="form-group">
                      <label class="col-form-label">{{ form.metodologia.label }}:</label>
-                     {% render_field form.metodologia id="select_multiple_crear_proyecto_metodologia" class="form-control" %}
-                     <!--
-                     {#% if perms.proyecto.add_metologia%#}
-                        <button onclick="abrir_modal_crear_metodologia('{% url 'proyecto:crear_metodologia' %}')" class="btn btn-primary btn-md">Metodología <i class="d-md-none d-block feather icon-plus white"></i></button>
+                     {% render_field form.metodologia id="select_multiple_editar_proyecto_metodologia" class="form-control" %}
 
-                        {#% endif %#} 
-                        -->   
                   </div>
                    <div class="form-group">
                      <label class="col-form-label">{{ form.director.label }}:</label>
-                     {% render_field form.director id="select_multiple_crear_proyecto_director" class="form-control" %}
+                     {% render_field form.director id="select_multiple_editar_proyecto_director" class="form-control" %}
 
                   </div>
                   <div class="form-group">
                      <label class="col-form-label">{{ form.colaborador.label }}:</label>
-                     {% render_field form.colaborador id="select_multiple_crear_proyecto_colaborador" class="form-control" %}
+                     {% render_field form.colaborador id="select_multiple_editar_proyecto_colaborador" class="form-control" %}
 
                   </div>
                   <div class="form-group">
