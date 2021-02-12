@@ -387,14 +387,13 @@ function eliminar(pk) {
     });
 }
 
-
 function listaReglasServerSide(){
     //listadoAutores(); 
-	                //Destruir la tabla para evitar el error: 
-					if ($.fn.DataTable.isDataTable('#tabla_listar_reglas')) {
-						$('#tabla_listar_reglas').DataTable().destroy();
-						console.log("romper --> ")
-					}
+    //Destruir la tabla para evitar el error: 
+    if ($.fn.DataTable.isDataTable('#tabla_listar_reglas')) {
+        $('#tabla_listar_reglas').DataTable().destroy();
+        console.log("romper --> ")
+    }
 
     $('#tabla_listar_reglas').DataTable({
         //bloquea el filtro de la columna

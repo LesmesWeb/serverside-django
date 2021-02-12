@@ -183,7 +183,7 @@ class ListarProyectoFiltros(_FormValidFiltros):
 	permission_required = 'proyecto.view_proyecto'
 
 	def get_queryset(self):
-		qs = self.model.objects.all().prefetch_related('director').prefetch_related('colaborador').prefetch_related('metodologia').prefetch_related('keywords')
+		qs = self.model.objects.all().prefetch_related('director').prefetch_related('colaborador').prefetch_related('metodologia')
 		product_filtered_list = ProyectoFilter(self.request.GET, queryset=qs)
 		return product_filtered_list.qs,product_filtered_list #Django Filter (https://riptutorial.com/es/django/example/21255/utilice-django-filter-con-cbv)
 
