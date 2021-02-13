@@ -3,80 +3,6 @@ var $ = jQuery.noConflict();
 /* ----------------------------------------
     funciones Reutilizables 
  ---------------------------------------- */
-// está opción es para diseñar la tabla con ajax
-function listadoReglas(){
-
-    //$ (define que es una instancia jquery)
-    // la ruta debe tener "/" al inicio para que busque a través del dominio
-    $.ajax({
-        url: "/stakeholders/reglas/",
-        type:"get",
-        dataType: "json",
-        // que pasa si la petición es correcta, la función recibe la respuesta
-        success: function(response){
-            // Validamos que existe el data table con el proposito de que no genere error por el hecho que se repita, asi que se valida para quitar y volver a poner
-            if($.fn.DataTable.isDataTable('#tabla_listar_reglas')){
-                //si existe una instancia datatable con el id tabla detruir
-                $('#tabla_listar_reglas').DataTable().destroy();
-            }
-
-            $('#tabla_listar_reglas tbody').html("");
-            for (let i = 0; i < response.length; i++) {
-                let fila = '<tr>';
-                fila += '<td><input type="checkbox" class="input-chk check"></td>';
-                fila += '<td>' + (i + 1) + '</td>';
-                fila += '<td>' + response[i]["fields"]['actor'] + '</td>';
-                fila += '<td>' + response[i]["fields"]['nombre'] + '</td>';
-                fila += '<td>' + response[i]["fields"]['created_at'] + '</td>';
-                fila += '<td>' + response[i]["fields"]['updated_at'] + '</td>';
-                fila += '<td>';
-                fila += '<div class="row">';
-                fila += '<div class="col-6 col-xl-6 col-lg-6 col-sm-6 p-0 text-right">';
-                fila += '<button onclick = "abrir_modal_edicion_regla(\'/stakeholders/editar_regla/' + response[i]['pk'] + '/\');"'
-                fila += 'class="btn btn-info"><i class="fa fa-edit fa-1x"> </i> </button></div>';
-
-                fila += '<div class="col-6 col-xl-6 col-lg-6 col-sm-6 pl-1 text-left">';
-                fila += '<button onclick = "abrir_modal_eliminacion(\'/stakeholders/eliminar_regla/' + response[i]['pk'] + '/\');"'
-
-                fila += 'class="btn btn-danger"><i class="feather icon-edit-2 fa-1x"> </i> </button></div>';
-
-                fila += '</div></div>';
-                fila += '</td>';
-                fila += '</tr>';
-                $('#tabla_listar_reglas tbody').append(fila);
-            }
-            
-            //Traducción del dataTable
-            $('#tabla_listar_reglas').DataTable({
-                searchDelay: 350,
-                language: {
-                    decimal: "",
-                    emptyTable: "No hay información",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
-                    infoFiltered: "(Filtrado de _MAX_ total entradas)",
-                    infoPostFix: "",
-                    thousands: ",",
-                    lengthMenu: "Mostrar _MENU_ Entradas",
-                    loadingRecords: "Cargando...",
-                    processing: "Procesando...",
-                    search: "Buscar:",
-                    zeroRecords: "Sin resultados encontrados",
-                    paginate: {
-                      first: "Primero",
-                      last: "Ultimo",
-                      next: "Siguiente",
-                      previous: "Anterior",
-                    },
-                  },
-            });
-            
-        },
-        error: function(error){
-            console.log("error --> ", error);
-        }
-    });
-}
 
 function BuscarPorNombreModelo(id_input,url_django) {
 
@@ -387,8 +313,83 @@ function eliminar(pk) {
     });
 }
 
+// está opción es para diseñar la tabla con ajax
+function listadoReglas(){
+
+    //$ (define que es una instancia jquery)
+    // la ruta debe tener "/" al inicio para que busque a través del dominio
+    $.ajax({
+        url: "/stakeholders/reglas/",
+        type:"get",
+        dataType: "json",
+        // que pasa si la petición es correcta, la función recibe la respuesta
+        success: function(response){
+            // Validamos que existe el data table con el proposito de que no genere error por el hecho que se repita, asi que se valida para quitar y volver a poner
+            if($.fn.DataTable.isDataTable('#tabla_listar_reglas')){
+                //si existe una instancia datatable con el id tabla detruir
+                $('#tabla_listar_reglas').DataTable().destroy();
+            }
+
+            $('#tabla_listar_reglas tbody').html("");
+            for (let i = 0; i < response.length; i++) {
+                let fila = '<tr>';
+                fila += '<td><input type="checkbox" class="input-chk check"></td>';
+                fila += '<td>' + (i + 1) + '</td>';
+                fila += '<td>' + response[i]["fields"]['actor'] + '</td>';
+                fila += '<td>' + response[i]["fields"]['nombre'] + '</td>';
+                fila += '<td>' + response[i]["fields"]['created_at'] + '</td>';
+                fila += '<td>' + response[i]["fields"]['updated_at'] + '</td>';
+                fila += '<td>';
+                fila += '<div class="row">';
+                fila += '<div class="col-6 col-xl-6 col-lg-6 col-sm-6 p-0 text-right">';
+                fila += '<button onclick = "abrir_modal_edicion_regla(\'/stakeholders/editar_regla/' + response[i]['pk'] + '/\');"'
+                fila += 'class="btn btn-info"><i class="fa fa-edit fa-1x"> </i> </button></div>';
+
+                fila += '<div class="col-6 col-xl-6 col-lg-6 col-sm-6 pl-1 text-left">';
+                fila += '<button onclick = "abrir_modal_eliminacion(\'/stakeholders/eliminar_regla/' + response[i]['pk'] + '/\');"'
+
+                fila += 'class="btn btn-danger"><i class="feather icon-edit-2 fa-1x"> </i> </button></div>';
+
+                fila += '</div></div>';
+                fila += '</td>';
+                fila += '</tr>';
+                $('#tabla_listar_reglas tbody').append(fila);
+            }
+            
+            //Traducción del dataTable
+            $('#tabla_listar_reglas').DataTable({
+                searchDelay: 350,
+                language: {
+                    decimal: "",
+                    emptyTable: "No hay información",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
+                    infoFiltered: "(Filtrado de _MAX_ total entradas)",
+                    infoPostFix: "",
+                    thousands: ",",
+                    lengthMenu: "Mostrar _MENU_ Entradas",
+                    loadingRecords: "Cargando...",
+                    processing: "Procesando...",
+                    search: "Buscar:",
+                    zeroRecords: "Sin resultados encontrados",
+                    paginate: {
+                      first: "Primero",
+                      last: "Ultimo",
+                      next: "Siguiente",
+                      previous: "Anterior",
+                    },
+                  },
+            });
+            
+        },
+        error: function(error){
+            console.log("error --> ", error);
+        }
+    });
+}
+
 function listaReglasServerSide(){
-    //listadoAutores(); 
+
     //Destruir la tabla para evitar el error: 
     if ($.fn.DataTable.isDataTable('#tabla_listar_reglas')) {
         $('#tabla_listar_reglas').DataTable().destroy();
@@ -419,28 +420,39 @@ function listaReglasServerSide(){
             },
         },
 
+        //bloquear las columnas para que no se active el filtrado
         "columnDefs": [
             { "orderable": false, "targets": 4 },
 			{ "orderable": false, "targets": 1 }
         ],
+
         "serverSide": true,
         "orderCellsTop": false,
         "processing": true,
+
         "ajax": function(data,callback,settings){
+            //data contiene toda la estructura del datatable en el se manejan diccionario para la busqueda, orden entre otros
+            console.log("data --> ",data)
+
+            //seleccionar el campo de asc o des del array llamado: ORDER
+            var asc_desc = data.order[0].dir;
+            console.log("asc y desc = ",asc_desc)
+
             //seleccionamos el dato de orderby
             var columna_filtro = data.columns[data.order[0].column].data.replace(/\./g,"__"); //limpiamos la url del filtro
-            console.log("data --> ",data)
+            
+
             //al interior del get se capturan todas las acciones
             $.get('/stakeholders/reglas/',{
-                //este limite e inicio lo trae de data
+                //Parametros para pasarlos a la url y luego capturarlos desde la vista
                 limite: data.length,
                 inicio: data.start,
                 filtro: data.search.value,
-                order_by: columna_filtro
+                order_by: columna_filtro,
+                asc_desc: asc_desc,
+                // "GET /stakeholders/reglas/?limite=10&inicio=0&filtro=&order_by=id&asc_desc=asc
+                
             }, function(res){
-
-
-
                 // una vez recibida la respuesta del servidor hacer
                 console.log("res --> ",res)
                     callback({
